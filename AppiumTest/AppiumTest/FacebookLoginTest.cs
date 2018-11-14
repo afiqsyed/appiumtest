@@ -40,7 +40,19 @@ namespace AppiumTest
             GivenIHaveAUsernameAndPassword(username, password);
             WhenIClickLoginButton();
             AndIInsertUserNameAndPassword();
-            UserIsSuccesfullyLogin();
+            ThenUserIsSuccesfullyLogin();
+        }
+
+        [Test]
+        public void LoginUsingFacebook_InCorrectUsernamePassowod_Unsuccessful()
+        {
+            var username = "[Facebook Usernama]";
+            var password = "[Facebook Paassword]";
+
+            GivenIHaveAUsernameAndPassword(username, password);
+            WhenIClickLoginButton();
+            AndIInsertUserNameAndPassword();
+            ThenWrongPasswordErrorAppear();
         }
 
         [Test]
@@ -53,9 +65,7 @@ namespace AppiumTest
             GivenIHaveAUsernameAndPassword(username, password);
             WhenIClickLoginButton();
             AndIInsertUserNameAndPassword();
-
-            // Assert That Wrong Username and Password Messages Appear
-            NUnit.Framework.Assert.IsTrue(VerifyThatElementIsPresent("[Element]"));
+            ThenUserIsLoginUnseccesful();
         }
 
         [Test]
@@ -70,7 +80,7 @@ namespace AppiumTest
             AndIInsertUserNameAndPassword();
 
             // Assert That The Permission Page Appear
-            NUnit.Framework.Assert.IsTrue(VerifyThatElementIsPresent("[Element]"));
+            Assert.IsTrue(VerifyThatElementIsPresent("[Element]"));
         }
 
         private void GivenIHaveAUsernameAndPassword(string username, string password)
@@ -91,10 +101,22 @@ namespace AppiumTest
             hideKeyBoard();
         }
 
-        private void UserIsSuccesfullyLogin()
+        private void ThenUserIsSuccesfullyLogin()
         {
             // Assert That The Welcome Page Is Shown
-            NUnit.Framework.Assert.IsTrue(VerifyThatElementIsPresent("Welcome Page Element Id"));
+            Assert.IsTrue(VerifyThatElementIsPresent("Welcome Page Element Id"));
+        }
+
+        private void ThenUserIsLoginUnseccesful()
+        {
+            // Assert That The Unsecucesful Login Page Is Shown
+            Assert.IsTrue(VerifyThatElementIsPresent("Unsuccesful LOgin Element Id"));
+        }
+
+        private void ThenWrongPasswordErrorAppear()
+        {
+            // Assert That The Wrong Password Error Is Shown
+            Assert.IsTrue(VerifyThatElementIsPresent("Error Password Id"));
         }
 
 
